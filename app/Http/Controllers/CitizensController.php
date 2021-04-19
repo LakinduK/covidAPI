@@ -29,10 +29,25 @@ class CitizensController extends Controller
         //return response()->json($citizen::find($nic), 200);
     }
 
-    public function addCitizen(Request $request) 
+    public function addCitizen(Request $request)
     {
         $citizen = ModelsCitizen::create($request->all());
         return response($citizen, 201);
+    }
+    public function updateCitizen(Request $request, $nic)
+    {
 
+        $citizen = FacadesDB::table('citizens')
+            ->where('nic', $nic)
+            ->update($request->all());
+
+        return response()->json($citizen);
     }
 }
+
+    // $citizen = ModelsCitizen::find($nic);
+        // if (is_null($citizen)) {
+        //     return response()->json(['message' => 'Citizen not found'], 404);
+        // }
+        // $citizen->update($request->all());
+        // return response($citizen, 200);

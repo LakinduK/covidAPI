@@ -24,7 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
 
 // GET info from citizens NIC
-Route::get('citizens/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('citizens');
+Route::get('citizen/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('getCitizenByNic');
 
 // POST add new citizen
 Route::post('addCitizen', [CitizensController::class, 'addCitizen']);
+
+// PUT update citizen from NIC
+//Route::put('updateCitizen/{nic}',[CitizensController::class, 'updateCitizen'] );
+Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen']);
