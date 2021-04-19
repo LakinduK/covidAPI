@@ -15,6 +15,16 @@ class CreateCitizensTable extends Migration
     {
         Schema::create('citizens', function (Blueprint $table) {
             $table->id();
+            $table->string('nic');
+            $table->string('name');
+            $table->string('email');
+            $table->string('password');
+            $table->Integer('age');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('currentStatus');
+            $table->string('profession');
+            $table->string('affiliation');
             $table->timestamps();
         });
     }
