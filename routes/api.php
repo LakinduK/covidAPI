@@ -23,3 +23,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // GET all info from citizens
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
 
+// GET info from citizens NIC
+Route::get('citizens/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('citizens');
