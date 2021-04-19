@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitizensController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,8 @@ Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen'])
 //DELETE delete citizen by NIC
 //Route::get('delete-citizen/{nic}', [CitizensController::class, 'destroy']);
 Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
+
+
+
+// GET all info by locations
+Route::get('locations/', [LocationController::class, 'getLocation'])->name('locations');
