@@ -11,4 +11,7 @@ class Citizen extends Model
     // protected $primaryKey = 'nic';
     // public $incrementing = false;
     // protected $keyType = 'string';
+
+    public $timestamps = false;
+    protected $fillable = ['nic', 'name', 'email', 'password', 'age', 'address', 'phone', 'currentStatus', 'profession', 'affiliation',];
 }
