@@ -27,8 +27,7 @@ Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citize
 Route::get('citizen/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('getCitizenByNic');
 
 // POST add new citizen
-Route::post('addCitizen', [CitizensController::class, 'addCitizen']);
+Route::post('add-citizen', [CitizensController::class, 'addCitizen']);
 
 // PUT update citizen from NIC
-//Route::put('updateCitizen/{nic}',[CitizensController::class, 'updateCitizen'] );
 Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen']);
