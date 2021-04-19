@@ -41,13 +41,10 @@ class CitizensController extends Controller
             ->where('nic', $nic)
             ->update($request->all());
 
+        if ($citizen == 0) {
+            return response()->json(['message' => 'Citizen not found'], 404);
+        }
         return response()->json($citizen);
     }
 }
 
-    // $citizen = ModelsCitizen::find($nic);
-        // if (is_null($citizen)) {
-        //     return response()->json(['message' => 'Citizen not found'], 404);
-        // }
-        // $citizen->update($request->all());
-        // return response($citizen, 200);
