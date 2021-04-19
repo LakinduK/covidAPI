@@ -28,4 +28,11 @@ class CitizensController extends Controller
         return response()->json($citizen);
         //return response()->json($citizen::find($nic), 200);
     }
+
+    public function addCitizen(Request $request) 
+    {
+        $citizen = ModelsCitizen::create($request->all());
+        return response($citizen, 201);
+
+    }
 }

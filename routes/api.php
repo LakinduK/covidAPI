@@ -25,3 +25,6 @@ Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citize
 
 // GET info from citizens NIC
 Route::get('citizens/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('citizens');
+
+// POST add new citizen
+Route::post('addCitizen', [CitizensController::class, 'addCitizen']);
