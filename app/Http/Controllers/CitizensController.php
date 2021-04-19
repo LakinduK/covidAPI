@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Citizen as ModelsCitizen;
-use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class CitizensController extends Controller
@@ -42,9 +41,27 @@ class CitizensController extends Controller
             ->update($request->all());
 
         if ($citizen == 0) {
+            return response()->json(['message' => 'Citizen not found or nothing to update'], 404);
+        }
+        return response()->json($citizen, 200);
+    }
+
+    // public function destroy($nic)
+    // {
+
+    //     FacadesDB::delete('delete from citizens where nic = ?', [$nic]);
+    //     echo "Record deleted successfully.<br/>";
+
+    // }
+    public function deleteCitizen(Request $request, $nic)
+    {
+        $citizen = FacadesDB::table('citizens')
+            ->where('nic', $nic)
+            ->delete();
+
+        if ($citizen == 0) {
             return response()->json(['message' => 'Citizen not found'], 404);
         }
-        return response()->json($citizen);
+        return response()->json($request, 204);
     }
 }
-

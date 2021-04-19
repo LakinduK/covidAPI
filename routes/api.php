@@ -20,14 +20,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// GET all info from citizens
+// GET all info by citizens
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
 
-// GET info from citizens NIC
+// GET info by citizens NIC
 Route::get('citizen/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('getCitizenByNic');
 
 // POST add new citizen
 Route::post('add-citizen', [CitizensController::class, 'addCitizen']);
 
-// PUT update citizen from NIC
+// PUT update citizen by NIC
 Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen']);
+
+//DELETE delete citizen by NIC
+//Route::get('delete-citizen/{nic}', [CitizensController::class, 'destroy']);
+Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
