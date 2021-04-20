@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitizensController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TestHistoryController;
 use App\Models\Location;
 
 /*
@@ -22,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// GET all info by citizens
+// GET all info from citizens
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
 
 // GET info by citizens NIC
@@ -39,7 +40,7 @@ Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen
 
 
 
-// GET all info by locations
+// GET all info from locations
 Route::get('locations/', [LocationController::class, 'getLocation']);
 
 // GET location info by citizens NIC
@@ -47,3 +48,8 @@ Route::get('locations/', [LocationController::class, 'getLocation']);
 
 // POST update the current location
 Route::post('update-location', [LocationController::class, 'updateLocation']);
+
+
+
+// GET all info from locations
+Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories']);
