@@ -12,4 +12,10 @@ class TestHistoryController extends Controller
     {
         return response()->json(ModelsTestHistory::all(), 200);
     }
+
+    public function addTestHistory(Request $request)
+    {
+        $testHistory = ModelsTestHistory::create($request->all());
+        return response($testHistory, 201);
+    }
 }

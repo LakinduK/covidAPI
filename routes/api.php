@@ -51,5 +51,8 @@ Route::post('update-location', [LocationController::class, 'updateLocation']);
 
 
 
-// GET all info from locations
+// GET all info from test Histories
 Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories']);
+
+// POST add new test histories
+Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
