@@ -10,4 +10,6 @@ class Location extends Model
     use HasFactory;
     public $timestamps = false;
     protected $dates = ['dateTime'];
+
+    protected $fillable = ['nic', 'locationName', 'lat', 'long', 'policeArea', 'dateTime'];
 }
