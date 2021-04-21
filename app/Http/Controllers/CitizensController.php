@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Citizen as ModelsCitizen;
 use Illuminate\Support\Facades\DB as FacadesDB;
+//use Illuminate\Support\Facades\Hash;
 
 class CitizensController extends Controller
 {
     public function getCitizen()
     {
         return response()->json(ModelsCitizen::all(), 200);
+        //return response()->json(ModelsCitizen::select(['nic','name']), 200);
     }
 
     public function getCitizenByNic($nic)
@@ -31,6 +33,21 @@ class CitizensController extends Controller
     public function addCitizen(Request $request)
     {
         $citizen = ModelsCitizen::create($request->all());
+
+        ///// password hashing
+        //signup hash
+        //$HashedPW = Hash::make($request->get('Password'));
+
+        //login hashj
+        //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
+
+        // $citizen = new ModelsCitizen();
+        // $citizen->password = $HashedPW;
+
+        //...
+        //$citizen->save();
+
+
         return response($citizen, 201);
     }
     public function updateCitizen(Request $request, $nic)
