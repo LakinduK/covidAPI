@@ -18,4 +18,16 @@ class TestHistoryController extends Controller
         $testHistory = ModelsTestHistory::create($request->all());
         return response($testHistory, 201);
     }
+
+    public function deleteTestHistory(Request $request, $nic)
+    {
+        $testHistory = FacadesDB::table('test_histories')
+            ->where('nic', $nic)
+            ->delete();
+
+        if ($testHistory == 0) {
+            return response()->json(['message' => 'Test History not found'], 404);
+        }
+        return response()->json($request, 204);
+    }
 }

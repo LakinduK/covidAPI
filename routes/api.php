@@ -59,4 +59,5 @@ Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories'])
 // POST add new test histories
 Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
 
-
+//DELETE delete test history by NIC
+Route::delete('delete-testhistory/{nic}', [TestHistoryController::class, 'deleteTestHistory']);
