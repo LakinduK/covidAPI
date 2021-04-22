@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Citizen as ModelsCitizen;
 use Illuminate\Support\Facades\DB as FacadesDB;
 //use Illuminate\Support\Facades\Hash;
+use Exception;
 
 class CitizensController extends Controller
 {
@@ -36,18 +37,18 @@ class CitizensController extends Controller
         return response($citizen, 201);
     }
 
-       ///// password hashing
-        //signup hash
-        //$HashedPW = Hash::make($request->get('Password'));
+    ///// password hashing
+    //signup hash
+    //$HashedPW = Hash::make($request->get('Password'));
 
-        //login hashj
-        //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
+    //login hashj
+    //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
 
-        // $citizen = new ModelsCitizen();
-        // $citizen->password = $HashedPW;
+    // $citizen = new ModelsCitizen();
+    // $citizen->password = $HashedPW;
 
-        //...
-        //$citizen->save();
+    //...
+    //$citizen->save();
     public function updateCitizen(Request $request, $nic)
     {
 
@@ -71,5 +72,22 @@ class CitizensController extends Controller
             return response()->json(['message' => 'Citizen not found'], 404);
         }
         return response()->json($request, 204);
+    }
+    public function loginCitizen(Request $request)
+    {
+        try {
+            $userInEmail = $request->input('email');
+            $userInpw = $request->input('password');
+
+            $email = FacadesDB::table('citizens')->where('email', $userInEmail)->value('email');
+            $password = FacadesDB::table('citizens')->where('password', $userInpw)->value('password');
+
+            if ($email == $userInEmail && $password == $userInpw) {
+                return response()->json(['message' => 'login successfull'], 200);
+            }
+            return response()->json(['message' => 'invalid credentials'], 404);
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
     }
 }

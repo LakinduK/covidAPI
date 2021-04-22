@@ -31,6 +31,7 @@ Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citize
 //2) GET info by citizens NIC
 Route::get('citizen/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('getCitizenByNic');
 
+
 //3) POST add new citizen
 Route::post('add-citizen', [CitizensController::class, 'addCitizen']);
 
@@ -39,6 +40,9 @@ Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen'])
 
 //5) DELETE delete citizen by NIC
 Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
+
+//20) POST login citizen
+Route::post('login-citizen/', [CitizensController::class, 'loginCitizen']);
 
 
 // // Locations ////
