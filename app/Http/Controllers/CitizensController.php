@@ -33,7 +33,10 @@ class CitizensController extends Controller
     {
         $citizen = ModelsCitizen::create($request->all());
 
-        ///// password hashing
+        return response($citizen, 201);
+    }
+
+       ///// password hashing
         //signup hash
         //$HashedPW = Hash::make($request->get('Password'));
 
@@ -45,13 +48,6 @@ class CitizensController extends Controller
 
         //...
         //$citizen->save();
-
-
-
-
-
-        return response($citizen, 201);
-    }
     public function updateCitizen(Request $request, $nic)
     {
 

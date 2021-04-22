@@ -52,8 +52,11 @@ Route::get('location/{nic}', [LocationController::class, 'getLocationByNic']);
 //8) POST add the current location
 Route::post('add-location', [LocationController::class, 'addLocation']);
 
+//4) PUT update location by NIC
+Route::put('update-location/{id}', [LocationController::class, 'updateLocation']);
+
 //9) DELETE delete location by NIC
-Route::delete('delete-location/{nic}', [LocationController::class, 'deleteLocation']);
+Route::delete('delete-location/{id}', [LocationController::class, 'deleteLocation']);
 
 
 // // Test Histories ////
