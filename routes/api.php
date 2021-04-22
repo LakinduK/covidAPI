@@ -49,8 +49,8 @@ Route::get('locations/', [LocationController::class, 'getLocation']);
 //7) GET location info by citizens NIC
 Route::get('location/{nic}', [LocationController::class, 'getLocationByNic']);
 
-//8) POST update the current location
-Route::post('update-location', [LocationController::class, 'updateLocation']);
+//8) POST add the current location
+Route::post('add-location', [LocationController::class, 'addLocation']);
 
 //9) DELETE delete location by NIC
 Route::delete('delete-location/{nic}', [LocationController::class, 'deleteLocation']);

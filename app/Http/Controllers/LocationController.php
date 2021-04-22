@@ -25,7 +25,7 @@ class LocationController extends Controller
         return response()->json($location);
     }
 
-    public function updateLocation(Request $request)
+    public function addLocation(Request $request)
     {
         $location = ModelsLocation::create($request->all());
         return response($location, 201);
