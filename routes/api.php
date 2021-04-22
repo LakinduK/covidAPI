@@ -49,6 +49,8 @@ Route::get('location/{nic}', [LocationController::class, 'getLocationByNic']);
 // POST update the current location
 Route::post('update-location', [LocationController::class, 'updateLocation']);
 
+//DELETE delete location by NIC
+Route::delete('delete-location/{nic}', [LocationController::class, 'deleteLocation']);
 
 
 // GET all info from test Histories
@@ -56,3 +58,5 @@ Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories'])
 
 // POST add new test histories
 Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
+
+
