@@ -90,3 +90,6 @@ Route::put('update-phi/{nic}', [PhiController::class, 'updatePhi']);
 
 //DELETE delete phi  by NIC
 Route::delete('delete-phi/{nic}', [PhiController::class, 'deletePhi']);
+
+//POST login phi
+Route::post('login-phi/', [PhiController::class, 'loginPhi']);

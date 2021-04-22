@@ -48,6 +48,9 @@ class CitizensController extends Controller
         //$citizen->save();
 
 
+        
+
+
         return response($citizen, 201);
     }
     public function updateCitizen(Request $request, $nic)
