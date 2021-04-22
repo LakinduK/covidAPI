@@ -13,6 +13,18 @@ class LocationController extends Controller
         return response()->json(ModelsLocation::all(), 200);
     }
 
+    public function getLocationByNic($nic)
+    {
+        $location = FacadesDB::table('locations')
+            ->where('nic', '=', $nic)->get();
+
+        if (is_null($location)) {
+            return response()->json(['message' => 'location not found!'], 404);
+        }
+
+        return response()->json($location);
+    }
+
     public function updateLocation(Request $request)
     {
         $location = ModelsLocation::create($request->all());
