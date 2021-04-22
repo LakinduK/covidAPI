@@ -25,71 +25,71 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // // Citizens ////
 
-// GET all info from citizens
+//1) GET all info from citizens
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
 
-// GET info by citizens NIC
+//2) GET info by citizens NIC
 Route::get('citizen/{nic}', [CitizensController::class, 'getCitizenByNic'])->name('getCitizenByNic');
 
-// POST add new citizen
+//3) POST add new citizen
 Route::post('add-citizen', [CitizensController::class, 'addCitizen']);
 
-// PUT update citizen by NIC
+//4) PUT update citizen by NIC
 Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen']);
 
-//DELETE delete citizen by NIC
+//5) DELETE delete citizen by NIC
 Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
 
 
 // // Locations ////
 
-// GET all info from locations
+//6) GET all info from locations
 Route::get('locations/', [LocationController::class, 'getLocation']);
 
-// GET location info by citizens NIC
+//7) GET location info by citizens NIC
 Route::get('location/{nic}', [LocationController::class, 'getLocationByNic']);
 
-// POST update the current location
+//8) POST update the current location
 Route::post('update-location', [LocationController::class, 'updateLocation']);
 
-//DELETE delete location by NIC
+//9) DELETE delete location by NIC
 Route::delete('delete-location/{nic}', [LocationController::class, 'deleteLocation']);
 
 
 // // Test Histories ////
 
-// GET all info from test Histories
+//10) GET all info from test Histories
 Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories']);
 
-// GET location info from test History by NIC
+//11) GET location info from test History by NIC
 Route::get('testhistory/{nic}', [TestHistoryController::class, 'getTestHistoryByNic']);
 
-// POST add new test history
+//12) POST add new test history
 Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
 
-// PUT update test History by NIC
+//13) PUT update test History by NIC
 Route::put('update-testhistory/{nic}', [TestHistoryController::class, 'updateTestHistory']);
 
-//DELETE delete test history by NIC
+//14) DELETE delete test history by NIC
 Route::delete('delete-testhistory/{nic}', [TestHistoryController::class, 'deleteTestHistory']);
 
 
 // // Phi & CDC  ////
 
-// GET all info from Phi
+//15)  GET all info from Phi
 Route::get('phis/', [PhiController::class, 'getPhis']);
 
-// GET location info from Phi by NIC
+//16)  GET location info from Phi by NIC
 Route::get('phi/{nic}', [PhiController::class, 'getPhiByNic']);
 
-// POST add new  Phi
+//17)  POST add new  Phi
 Route::post('add-phi/', [PhiController::class, 'addPhi']);
 
-// PUT update  Phi by NIC
+//18)  PUT update  Phi by NIC
 Route::put('update-phi/{nic}', [PhiController::class, 'updatePhi']);
 
-//DELETE delete phi  by NIC
+//19)  DELETE delete phi  by NIC
 Route::delete('delete-phi/{nic}', [PhiController::class, 'deletePhi']);
 
-//POST login phi
+//20) POST login phi
 Route::post('login-phi/', [PhiController::class, 'loginPhi']);

@@ -12,7 +12,6 @@ class CitizensController extends Controller
     public function getCitizen()
     {
         return response()->json(ModelsCitizen::all(), 200);
-        //return response()->json(ModelsCitizen::select(['nic','name']), 200);
     }
 
     public function getCitizenByNic($nic)
@@ -48,7 +47,7 @@ class CitizensController extends Controller
         //$citizen->save();
 
 
-        
+
 
 
         return response($citizen, 201);
@@ -66,13 +65,6 @@ class CitizensController extends Controller
         return response()->json($citizen, 200);
     }
 
-    // public function destroy($nic)
-    // {
-
-    //     FacadesDB::delete('delete from citizens where nic = ?', [$nic]);
-    //     echo "Record deleted successfully.<br/>";
-
-    // }
     public function deleteCitizen(Request $request, $nic)
     {
         $citizen = FacadesDB::table('citizens')
