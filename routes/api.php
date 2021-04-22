@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitizensController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TestHistoryController;
+use App\Http\Controllers\PhiController;
 use App\Models\Location;
 
 /*
@@ -63,11 +64,11 @@ Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories'])
 // GET location info from test History by NIC
 Route::get('testhistory/{nic}', [TestHistoryController::class, 'getTestHistoryByNic']);
 
-// PUT update test Histories by NIC
-Route::put('update-testhistory/{nic}', [TestHistoryController::class, 'updateTestHistory']);
-
-// POST add new test histories
+// POST add new test history
 Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
+
+// PUT update test History by NIC
+Route::put('update-testhistory/{nic}', [TestHistoryController::class, 'updateTestHistory']);
 
 //DELETE delete test history by NIC
 Route::delete('delete-testhistory/{nic}', [TestHistoryController::class, 'deleteTestHistory']);
@@ -75,3 +76,17 @@ Route::delete('delete-testhistory/{nic}', [TestHistoryController::class, 'delete
 
 // // Phi & CDC  ////
 
+// GET all info from Phi
+Route::get('phis/', [PhiController::class, 'getPhis']);
+
+// GET location info from Phi by NIC
+Route::get('phi/{nic}', [PhiController::class, 'getPhiByNic']);
+
+// POST add new  Phi
+Route::post('add-phi/', [PhiController::class, 'addPhi']);
+
+// PUT update  Phi by NIC
+Route::put('update-phi/{nic}', [PhiController::class, 'updatePhi']);
+
+//DELETE delete phi  by NIC
+Route::delete('delete-phi/{nic}', [PhiController::class, 'deletePhi']);
