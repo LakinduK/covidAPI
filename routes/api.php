@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// // Citizens ////
 
 // GET all info from citizens
 Route::get('citizens/', [CitizensController::class, 'getCitizen'])->name('citizens');
@@ -39,6 +40,7 @@ Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen'])
 Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
 
 
+// // Locations ////
 
 // GET all info from locations
 Route::get('locations/', [LocationController::class, 'getLocation']);
@@ -53,11 +55,23 @@ Route::post('update-location', [LocationController::class, 'updateLocation']);
 Route::delete('delete-location/{nic}', [LocationController::class, 'deleteLocation']);
 
 
+// // Test Histories ////
+
 // GET all info from test Histories
 Route::get('testhistories/', [TestHistoryController::class, 'getTestHistories']);
+
+// GET location info from test History by NIC
+Route::get('testhistory/{nic}', [TestHistoryController::class, 'getTestHistoryByNic']);
+
+// PUT update test Histories by NIC
+Route::put('update-testhistory/{nic}', [TestHistoryController::class, 'updateTestHistory']);
 
 // POST add new test histories
 Route::post('add-testhistory/', [TestHistoryController::class, 'addTestHistory']);
 
 //DELETE delete test history by NIC
 Route::delete('delete-testhistory/{nic}', [TestHistoryController::class, 'deleteTestHistory']);
+
+
+// // Phi & CDC  ////
+

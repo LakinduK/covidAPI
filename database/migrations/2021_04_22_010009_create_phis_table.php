@@ -15,6 +15,12 @@ class CreatePhisTable extends Migration
     {
         Schema::create('phis', function (Blueprint $table) {
             $table->id();
+            $table->string('nic');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone');
+            $table->integer('user_type');
             $table->timestamps();
         });
     }
