@@ -30,4 +30,16 @@ class LocationController extends Controller
         $location = ModelsLocation::create($request->all());
         return response($location, 201);
     }
+
+    public function deleteLocation(Request $request, $nic)
+    {
+        $location = FacadesDB::table('locations')
+            ->where('nic', $nic)
+            ->delete();
+
+        if ($location == 0) {
+            return response()->json(['message' => 'Location not found'], 404);
+        }
+        return response()->json($request, 204);
+    }
 }
