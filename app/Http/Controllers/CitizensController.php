@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Citizen as ModelsCitizen;
 use Illuminate\Support\Facades\DB as FacadesDB;
 //use Illuminate\Support\Facades\Hash;
+use Exception;
+
+use function PHPUnit\Framework\isNull;
 
 class CitizensController extends Controller
 {
     public function getCitizen()
     {
         return response()->json(ModelsCitizen::all(), 200);
-        //return response()->json(ModelsCitizen::select(['nic','name']), 200);
     }
 
     public function getCitizenByNic($nic)
@@ -30,26 +32,43 @@ class CitizensController extends Controller
         //return response()->json($citizen::find($nic), 200);
     }
 
+    public function getResultsCount()
+    {
+        try {
+            $positiveCount = ModelsCitizen::where('currentStatus', '=', 'positive')->count();
+            $negativeCount = ModelsCitizen::where('currentStatus', '=', 'negative')->count();
+            $deceasedCount = ModelsCitizen::where('currentStatus', '=', 'deceased')->count();
+
+            return response()
+                ->json([
+                    'positive' => $positiveCount,
+                    'negative' => $negativeCount,
+                    'deceased' => $deceasedCount
+                ], 200);
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
+    }
+
     public function addCitizen(Request $request)
     {
         $citizen = ModelsCitizen::create($request->all());
 
-        ///// password hashing
-        //signup hash
-        //$HashedPW = Hash::make($request->get('Password'));
-
-        //login hashj
-        //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
-
-        // $citizen = new ModelsCitizen();
-        // $citizen->password = $HashedPW;
-
-        //...
-        //$citizen->save();
-
-
         return response($citizen, 201);
     }
+
+    ///// password hashing
+    //signup hash
+    //$HashedPW = Hash::make($request->get('Password'));
+
+    //login hashj
+    //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
+
+    // $citizen = new ModelsCitizen();
+    // $citizen->password = $HashedPW;
+
+    //...
+    //$citizen->save();
     public function updateCitizen(Request $request, $nic)
     {
 
@@ -63,13 +82,6 @@ class CitizensController extends Controller
         return response()->json($citizen, 200);
     }
 
-    // public function destroy($nic)
-    // {
-
-    //     FacadesDB::delete('delete from citizens where nic = ?', [$nic]);
-    //     echo "Record deleted successfully.<br/>";
-
-    // }
     public function deleteCitizen(Request $request, $nic)
     {
         $citizen = FacadesDB::table('citizens')
@@ -80,5 +92,22 @@ class CitizensController extends Controller
             return response()->json(['message' => 'Citizen not found'], 404);
         }
         return response()->json($request, 204);
+    }
+    public function loginCitizen(Request $request)
+    {
+        try {
+            $userInEmail = $request->input('email');
+            $userInpw = $request->input('password');
+
+            $email = FacadesDB::table('citizens')->where('email', $userInEmail)->value('email');
+            $password = FacadesDB::table('citizens')->where('password', $userInpw)->value('password');
+
+            if ($email == $userInEmail && $password == $userInpw) {
+                return response()->json(['message' => 'login successfull'], 200);
+            }
+            return response()->json(['message' => 'invalid credentials'], 404);
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
     }
 }

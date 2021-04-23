@@ -25,16 +25,29 @@ class LocationController extends Controller
         return response()->json($location);
     }
 
-    public function updateLocation(Request $request)
+    public function addLocation(Request $request)
     {
         $location = ModelsLocation::create($request->all());
         return response($location, 201);
     }
 
-    public function deleteLocation(Request $request, $nic)
+    public function updateLocation(Request $request, $id)
+    {
+
+        $location = FacadesDB::table('locations')
+            ->where('id', $id)
+            ->update($request->all());
+
+        if ($location == 0) {
+            return response()->json(['message' => 'location not found or nothing to update'], 404);
+        }
+        return response()->json($location, 200);
+    }
+
+    public function deleteLocation(Request $request, $id)
     {
         $location = FacadesDB::table('locations')
-            ->where('nic', $nic)
+            ->where('id', $id)
             ->delete();
 
         if ($location == 0) {

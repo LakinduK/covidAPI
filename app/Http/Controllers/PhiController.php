@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Phi as ModelsPhi;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Http\Request;
+use App\Exceptions\InvalidOrderException;
+use Exception;
+
+use function PHPUnit\Framework\isTrue;
 
 class PhiController extends Controller
 {
@@ -54,4 +58,40 @@ class PhiController extends Controller
         }
         return response()->json($request, 204);
     }
+
+    public function loginPhi(Request $request)
+    {
+        try {
+            $userInEmail = $request->input('email');
+            $userInpw = $request->input('password');
+
+            $email = FacadesDB::table('phis')->where('email', $userInEmail)->value('email');
+            $password = FacadesDB::table('phis')->where('password', $userInpw)->value('password');
+
+            if ($email == $userInEmail && $password == $userInpw) {
+                return response()->json(['message' => 'login successfull'], 200);
+            }
+            return response()->json(['message' => 'invalid credentials'], 404);
+
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
+    }
+
+
+
+
+    ///// password hashing
+    //signup hash
+    //$HashedPW = Hash::make($request->get('Password'));
+
+    //login hashj
+    //$ImABoolean = Hash::check($request->get('Password'), $HashedPW);
+
+    // $citizen = new ModelsCitizen();
+    // $citizen->password = $HashedPW;
+
+    //...
+    //$citizen->save();
+
 }
