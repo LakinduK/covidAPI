@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 //use Illuminate\Support\Facades\Hash;
 use Exception;
 
+use function PHPUnit\Framework\isNull;
+
 class CitizensController extends Controller
 {
     public function getCitizen()
@@ -28,6 +30,24 @@ class CitizensController extends Controller
 
         return response()->json($citizen);
         //return response()->json($citizen::find($nic), 200);
+    }
+
+    public function getResultsCount()
+    {
+        try {
+            $positiveCount = ModelsCitizen::where('currentStatus', '=', 'positive')->count();
+            $negativeCount = ModelsCitizen::where('currentStatus', '=', 'negative')->count();
+            $deceasedCount = ModelsCitizen::where('currentStatus', '=', 'deceased')->count();
+
+            return response()
+                ->json([
+                    'positive' => $positiveCount,
+                    'negative' => $negativeCount,
+                    'deceased' => $deceasedCount
+                ], 200);
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
     }
 
     public function addCitizen(Request $request)
