@@ -143,4 +143,23 @@ class CitizensController extends Controller
             return response()->json($e, 404);
         }
     }
+    // get controller for mobile signUp
+    public function getSignUpCitizen(Request $request)
+    {
+        try {
+            $userInEmail = $request->input('email');
+            $userInNic = $request->input('nic');
+
+            if (FacadesDB::table('citizens')->where('email', $userInEmail)->exists()) {
+                return response()->json(['message' => 'Email already taken'], 409);
+            } else if (FacadesDB::table('citizens')->where('nic', $userInNic)->exists()) {
+                return response()->json(['message' => 'NIC already taken'], 409);
+            } else {
+                ModelsCitizen::create($request->all());
+                return response()->json(['message' => 'User account Created!'], 200);
+            }
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
+    }
 }
