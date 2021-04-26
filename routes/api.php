@@ -44,7 +44,10 @@ Route::put('update-citizen/{nic}', [CitizensController::class, 'updateCitizen'])
 Route::delete('delete-citizen/{nic}', [CitizensController::class, 'deleteCitizen']);
 
 //7) POST login citizen
-Route::post('login-citizen/', [CitizensController::class, 'loginCitizen']);
+Route::post('login-citizen/', [CitizensController::class, 'postLoginCitizen']);
+
+//7) GET login citizen
+Route::get('login-citizen/', [CitizensController::class, 'getLoginCitizen']);
 
 
 // // Locations ////

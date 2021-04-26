@@ -93,7 +93,7 @@ class CitizensController extends Controller
         }
         return response()->json($request, 204);
     }
-    public function loginCitizen(Request $request)
+    public function postLoginCitizen(Request $request)
     {
         try {
             $userInEmail = $request->input('email');
@@ -102,8 +102,41 @@ class CitizensController extends Controller
             $email = FacadesDB::table('citizens')->where('email', $userInEmail)->value('email');
             $password = FacadesDB::table('citizens')->where('password', $userInpw)->value('password');
 
+
             if ($email == $userInEmail && $password == $userInpw) {
                 return response()->json(['message' => 'login successfull'], 200);
+            }
+            return response()->json(['message' => 'invalid credentials'], 404);
+        } catch (Exception $e) {
+            return response()->json($e, 404);
+        }
+    }
+
+    // get controller for mobile login
+    public function getLoginCitizen(Request $request)
+    {
+        try {
+            $userInEmail = $request->input('email');
+            $userInpw = $request->input('password');
+
+            $dbRetrieve = FacadesDB::table('citizens')->where('email', $userInEmail);
+            $name = $dbRetrieve->value('name');
+            $email = FacadesDB::table('citizens')->where('email', $userInEmail)->value('email');
+            $password = FacadesDB::table('citizens')->where('password', $userInpw)->value('password');
+            $nic = FacadesDB::table('citizens')->where('email', $userInEmail)->value('nic');
+            $address = $dbRetrieve->value('address');
+            $phone = $dbRetrieve->value('phone');
+            $age = $dbRetrieve->value('age');
+            $profession = $dbRetrieve->value('profession');
+            $affiliation = $dbRetrieve->value('affiliation');
+
+            if ($email == $userInEmail && $password == $userInpw) {
+                return response()->json([
+                    'message' => 'login successfull',
+                    'nic' => $nic, 'name' => $name, 'email' => $email,
+                    'address' => $address, 'phone' => $phone, 'age' => $age,
+                    'profession' => $profession, 'affiliation' => $affiliation
+                ], 200);
             }
             return response()->json(['message' => 'invalid credentials'], 404);
         } catch (Exception $e) {
